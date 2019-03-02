@@ -1,33 +1,38 @@
-'use strict';
+"use strict";
 
 console.log("Connected !!");
 
-var personalInfo = {
-    name: 'Victor',
-    age: 5,
-    options: ['Yes', 'No']
-};
+var showBool = false;
 
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        'Hello ',
-        personalInfo.name
-    ),
-    personalInfo.age > 10 ? React.createElement(
-        'p',
-        null,
-        personalInfo.age
-    ) : React.createElement(
-        'p',
-        null,
-        'Below Age'
-    )
-);
+var showEvent = function showEvent() {
+    showBool = showBool ? false : true;
+    renderMe();
+};
 
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(templateTwo, appRoot);
+var renderMe = function renderMe() {
+    var template = React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h1",
+            null,
+            "Visibility Toggler"
+        ),
+        React.createElement(
+            "button",
+            { id: "show-button", onClick: showEvent },
+            showBool ? "Hide Details" : "Show Details"
+        ),
+        showBool && React.createElement(
+            "h3",
+            null,
+            "Victor Is Cool"
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+renderMe();
